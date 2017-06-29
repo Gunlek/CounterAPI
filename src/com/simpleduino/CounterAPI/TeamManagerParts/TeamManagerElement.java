@@ -108,13 +108,14 @@ public class TeamManagerElement {
                 int Low = 0;
                 int High = nonFullTeams.size()-1;
                 int randomValue = r.nextInt(High-Low) + Low;
-                while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam || (currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
+                /*while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam || (currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
                 {
                     if(randomValue==nonFullTeams.size()-1)
                         randomValue=0;
                     else
                         randomValue++;
-                }
+                }*/
+                Bukkit.broadcastMessage(Integer.toString(randomValue));
                 nonFullTeams.get(randomValue).addMember(p);
                 if((currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
                     currentOversized++;
