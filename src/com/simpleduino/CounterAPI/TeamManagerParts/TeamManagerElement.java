@@ -68,58 +68,26 @@ public class TeamManagerElement {
         {
             TotalPlayerCount+=te.getMembersCount();
         }
-        if(TotalPlayerCount%teamList.size()==0)
+        ArrayList<TeamElement> nonFullTeams = new ArrayList<>();
+        for(TeamElement te : teamList)
         {
-            ArrayList<TeamElement> nonFullTeams = new ArrayList<>();
-            for(TeamElement te : teamList)
-            {
-                if(te.getMembersCount()<maxPlayerPerTeam)
-                    nonFullTeams.add(te);
-            }
-            for(Player p : playerList)
-            {
-                Random r = new Random();
-                int Low = 0;
-                int High = nonFullTeams.size()-1;
-                int randomValue = r.nextInt(High-Low) + Low;
-                while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam)
-                {
-                    if(randomValue==nonFullTeams.size()-1)
-                        randomValue=0;
-                    else
-                        randomValue++;
-                }
-                nonFullTeams.get(randomValue).addMember(p);
-            }
+            if(te.getMembersCount()<maxPlayerPerTeam)
+                nonFullTeams.add(te);
         }
-        else
+        for(Player p : playerList)
         {
-            int oversize = playerList.size()%teamList.size(); // Number of teams that will get more player than "normal"
-            int currentOversized = 0;
-            ArrayList<TeamElement> nonFullTeams = new ArrayList<>();
-            for(TeamElement te : teamList)
+            Random r = new Random();
+            int Low = 0;
+            int High = nonFullTeams.size()-1;
+            int randomValue = r.nextInt(High-Low) + Low;
+            while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam)
             {
-                if(te.getMembersCount()<maxPlayerPerTeam)
-                    nonFullTeams.add(te);
+                if(randomValue==nonFullTeams.size()-1)
+                    randomValue=0;
+                else
+                    randomValue++;
             }
-            for(Player p : playerList)
-            {
-                Random r = new Random();
-                int Low = 0;
-                int High = nonFullTeams.size()-1;
-                int randomValue = r.nextInt(High-Low) + Low;
-                /*while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam || (currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
-                {
-                    if(randomValue==nonFullTeams.size()-1)
-                        randomValue=0;
-                    else
-                        randomValue++;
-                }*/
-                Bukkit.broadcastMessage(Integer.toString(randomValue));
-                nonFullTeams.get(randomValue).addMember(p);
-                if((currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
-                    currentOversized++;
-            }
+            nonFullTeams.get(randomValue).addMember(p);
         }
     }
 
