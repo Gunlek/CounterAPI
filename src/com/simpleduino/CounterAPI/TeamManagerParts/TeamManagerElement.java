@@ -95,6 +95,30 @@ public class TeamManagerElement {
         else
         {
             int oversize = playerList.size()%teamList.size(); // Number of teams that will get more player than "normal"
+            int currentOversized = 0;
+            ArrayList<TeamElement> nonFullTeams = new ArrayList<>();
+            for(TeamElement te : teamList)
+            {
+                if(te.getMembersCount()<maxPlayerPerTeam)
+                    nonFullTeams.add(te);
+            }
+            for(Player p : playerList)
+            {
+                Random r = new Random();
+                int Low = 0;
+                int High = nonFullTeams.size()-1;
+                int randomValue = r.nextInt(High-Low) + Low;
+                while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam || (currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
+                {
+                    if(randomValue==nonFullTeams.size()-1)
+                        randomValue=0;
+                    else
+                        randomValue++;
+                }
+                nonFullTeams.get(randomValue).addMember(p);
+                if((currentOversized<oversize && nonFullTeams.get(randomValue).getMembersCount()<=maxPlayerPerTeam))
+                    currentOversized++;
+            }
         }
     }
 
