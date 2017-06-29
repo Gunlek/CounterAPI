@@ -1,5 +1,7 @@
 package com.simpleduino.CounterAPI.TeamManagerParts;
 
+import com.simpleduino.CounterAPI.Events.PlayerJoinTeamEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class TeamElement {
         if(!this.members.contains(p)) {
             this.members.add(p);
             TeamManagerElement.playerTeams.put(p, this);
+            Bukkit.getPluginManager().callEvent(new PlayerJoinTeamEvent(p, this));
         }
     }
 

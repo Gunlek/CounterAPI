@@ -1,6 +1,7 @@
 package com.simpleduino.CounterAPI.TeamManagerParts;
 
 import com.simpleduino.CounterAPI.Events.PlayerAddedToTeamEvent;
+import com.simpleduino.CounterAPI.Events.PlayerJoinTeamEvent;
 import com.simpleduino.CounterAPI.Events.PlayerRemovedFromTeamEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -28,6 +29,7 @@ public class TeamManagerElement {
         team.addMember(p);
         playerTeams.put(p, team);
         Bukkit.getPluginManager().callEvent(new PlayerAddedToTeamEvent(p, team));
+        Bukkit.getPluginManager().callEvent(new PlayerJoinTeamEvent(p, team));
     }
 
     public void removePlayer(Player p, TeamElement team)
