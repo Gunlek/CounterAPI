@@ -1,0 +1,5 @@
+author: Fabien Aubret
+website: http://simple-duino.com
+name: CounterAPI
+version: 1.0
+main: com.simpleduino.CounterAPI.CounterAPIPlugin

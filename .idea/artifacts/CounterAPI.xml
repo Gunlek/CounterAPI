@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CounterAPI">
+    <output-path>$PROJECT_DIR$/../../dev_server/plugins</output-path>
+    <root id="archive" name="CounterAPI.jar">
+      <element id="module-output" name="CounterAPI" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/plugin.yml" />
+    </root>
+  </artifact>
+</component>
