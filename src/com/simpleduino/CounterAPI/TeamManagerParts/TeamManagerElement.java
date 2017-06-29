@@ -65,11 +65,6 @@ public class TeamManagerElement {
 
     public void autoRepart(ArrayList<Player> playerList, ArrayList<TeamElement> teamList, int maxPlayerPerTeam)
     {
-        int TotalPlayerCount = playerList.size();
-        for(TeamElement te : teamList)
-        {
-            TotalPlayerCount+=te.getMembersCount();
-        }
         ArrayList<TeamElement> nonFullTeams = new ArrayList<>();
         for(TeamElement te : teamList)
         {
@@ -81,15 +76,16 @@ public class TeamManagerElement {
             Random r = new Random();
             int Low = 0;
             int High = nonFullTeams.size()-1;
-            int randomValue = r.nextInt(High-Low) + Low;
-            while(nonFullTeams.get(randomValue).getMembersCount()>=maxPlayerPerTeam)
-            {
-                if(randomValue==nonFullTeams.size()-1)
-                    randomValue=0;
-                else
-                    randomValue++;
+            if(High-Low>0) {
+                int randomValue = r.nextInt(High - Low) + Low;
+                while (nonFullTeams.get(randomValue).getMembersCount() >= maxPlayerPerTeam) {
+                    if (randomValue == nonFullTeams.size() - 1)
+                        randomValue = 0;
+                    else
+                        randomValue++;
+                }
+                nonFullTeams.get(randomValue).addMember(p);
             }
-            nonFullTeams.get(randomValue).addMember(p);
         }
     }
 
